@@ -2,14 +2,16 @@ import React from "react"
 
 class Box extends React.Component {
   render() {
-    console.log(this.props)
+
+    const { status, value, icon, color, unit, max, min, onChange } = this.props
 
     return (
       <div className="box col-sm-3 col-6">
-        <span className="material-icons" style={{ fontSize: "100px", color: this.props.color }}>
-          {this.props.icon}
+        <span className="material-icons" style={{ fontSize: "100px", color: color }}>
+          {icon}
         </span>
-        <p>{this.props.value}{this.props.unit}</p>
+        <p>{value}{unit}</p>
+        {status !== "water" ? <input type="range" min={min} max={max} value={value} onChange={onChange}/> : ""}
       </div>
     )
   }
