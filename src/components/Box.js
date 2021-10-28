@@ -3,7 +3,7 @@ import React from "react"
 class Box extends React.Component {
   render() {
 
-    const { status, value, icon, color, unit, max, min, onChange } = this.props
+    const { status, value, icon, color, unit, max, min, onChange, onWaterChange } = this.props
 
     return (
       <div className="box col-sm-3 col-6">
