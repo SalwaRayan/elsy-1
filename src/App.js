@@ -23,25 +23,48 @@ class App extends React.Component {
   }
 
   onHeartChange = event => {
-    this.setState({ heart: this.state.heart = event.target.value })
-    this.calculateWater(event.target.value, 0.0008, 120, this.state.heart)
+    let heart = event.target.value
+    this.setState({ heart: event.target.value })
+    this.calculateWater(heart, this.state.steps, this.state.temperature)
   }
   
   onStepsChange = event => {
-    this.setState({ steps: this.state.steps = event.target.value })
-    this.calculateWater(event.target.value, 0.00002, 3000, this.state.steps)
+    let steps = event.target.value
+    this.setState({ steps: event.target.value })
+    this.calculateWater(this.state.heart, steps, this.state.temperature)
   }
   
   onTemperatureChange = event => {
-    this.setState({ teperature: this.state.temperature = event.target.value })
-    this.calculateWater(event.target.value, 0.02, -10, this.state.temperature)
+    let temperature = event.target.value
+    this.setState({ temperature: event.target.value })
+    this.calculateWater(this.state.heart, this.state.steps, temperature)
   }
 
-  calculateWater = (range, num, base, element) => {
-    if (range ++) {
-      this.state.water += num
-    } else if (range --) {
-      this.state.water -= num
+  calculateWater = (heart, steps, temp) => {
+    console.log("heart:", heart)
+    console.log("steps:", steps)
+    console.log("temp:", temp)
+    if (this.state.heart >= 120) {
+      if (heart > this.state.heart) {
+        this.setState({water: this.state.water += 0.0008})
+      } else if (heart < this.state.heart) {
+        this.setState({water: this.state.water -= 0.0008})
+      }
+    }
+
+    if (this.state.steps >= 10000) {
+      if (steps > this.state.steps) {
+        this.setState({water: this.state.water += 0.00002})
+      } else if (steps < this.state.steps) {
+        this.setState({water: this.state.water -= 0.00002})
+      }
+    }
+
+    if (this.state.temperature >= 20)
+    if (temp > this.state.temperature) {
+      this.setState({water: this.state.water += 0.02})
+    } else if (temp < this.state.temperature) {
+      this.setState({water: this.state.water -= 0.02})
     }
   }
   
